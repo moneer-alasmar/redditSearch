@@ -37,7 +37,7 @@ searchForm.addEventListener('submit', e => {
     // loop through posts
     results.forEach(post => {
       // check for image
-      const image = post.preview ? post.preview.images[0].source.url : './Reddit-logo.jpg'
+      const image = post.preview ? post.preview.images[0].source.url : 'https://i.imgur.com/9z9ZpLg.jpg'
 
       output += `
       <div class="card">
@@ -45,7 +45,10 @@ searchForm.addEventListener('submit', e => {
       <div class="card-body">
         <h5 class="card-title">${post.title}</h5>
         <p class="card-text">${truncateText(post.selftext, 100)}</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="${post.url}" target="_blank" class="btn btn-primary">Read More</a>
+        <hr>
+        <span class="badge badge-secondary">r/${post.subreddit}/</span>
+        <span class="badge badge-dark">Score: ${post.score}</span>
       </div>
     </div>
       `

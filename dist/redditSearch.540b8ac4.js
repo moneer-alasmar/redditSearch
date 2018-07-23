@@ -169,9 +169,9 @@ searchForm.addEventListener('submit', function (e) {
     // loop through posts
     results.forEach(function (post) {
       // check for image
-      var image = post.preview ? post.preview.images[0].source.url : './Reddit-logo.jpg';
+      var image = post.preview ? post.preview.images[0].source.url : 'https://i.imgur.com/9z9ZpLg.jpg';
 
-      output += '\n      <div class="card">\n      <img class="card-img-top" src="' + image + '" alt="Card image cap">\n      <div class="card-body">\n        <h5 class="card-title">' + post.title + '</h5>\n        <p class="card-text">' + truncateText(post.selftext, 100) + '</p>\n        <a href="#" class="btn btn-primary">Go somewhere</a>\n      </div>\n    </div>\n      ';
+      output += '\n      <div class="card">\n      <img class="card-img-top" src="' + image + '" alt="Card image cap">\n      <div class="card-body">\n        <h5 class="card-title">' + post.title + '</h5>\n        <p class="card-text">' + truncateText(post.selftext, 100) + '</p>\n        <a href="' + post.url + '" target="_blank" class="btn btn-primary">Read More</a>\n        <hr>\n        <span class="badge badge-secondary">r/' + post.subreddit + '/</span>\n        <span class="badge badge-dark">Score: ' + post.score + '</span>\n      </div>\n    </div>\n      ';
     });
     output += '</div>';
     document.getElementById('results').innerHTML = output;
@@ -239,7 +239,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54990' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54998' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
