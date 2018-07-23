@@ -110,9 +110,11 @@ var searchForm = document.getElementById('search-form');
 // search form input
 var searchInput = document.getElementById('search-input');
 
+// form event listener
 searchForm.addEventListener('submit', function (e) {
   // get search query
   var searchTerm = searchInput.value;
+  console.log(searchTerm);
 
   // get sort order
   var sortBy = document.querySelector('input[name="sortby"]:checked').value;
@@ -122,9 +124,44 @@ searchForm.addEventListener('submit', function (e) {
   var searchLimit = document.getElementById('limit').value;
   console.log(searchLimit);
 
-  console.log(searchTerm);
+  // check if no input
+  if (searchTerm === '') {
+    // display alert
+    showMessage('Please add a search query', 'alert-danger');
+  }
+
+  // clear input
+  searchInput.value = '';
+
+  // search reddit api
+
+
   e.preventDefault();
 });
+
+// show message function
+function showMessage(message, className) {
+  // create alert div
+  var div = document.createElement('div');
+  div.className = 'alert ' + className;
+
+  // add text
+  div.appendChild(document.createTextNode(message));
+
+  // get parent container
+  var searchContainer = document.getElementById('search-container');
+
+  // get search
+  var search = document.getElementById('search');
+
+  // insert message
+  searchContainer.insertBefore(div, search);
+
+  // timeout alert
+  setTimeout(function () {
+    return document.querySelector('.alert').remove();
+  }, 3000);
+}
 },{}],"C:\\Users\\Moneer\\AppData\\Roaming\\npm\\node_modules\\parcel-bundler\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
