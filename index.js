@@ -1,3 +1,6 @@
+// importing reddit js
+import reddit from './redditapi';
+
 // main search form
 const searchForm = document.getElementById('search-form');
 
@@ -28,7 +31,28 @@ searchForm.addEventListener('submit', e => {
   searchInput.value = '';
 
   // search reddit api
-  
+  reddit.search(searchTerm, searchLimit, sortBy).then(results => {
+    let output = '<div class="card-columns">';
+
+    // loop through posts
+    results.forEach(post => {
+      // check for image
+      const image = post.preview ? post.preview.images[0].source.url : './Reddit-logo.jpg'
+
+      output += `
+      <div class="card">
+      <img class="card-img-top" src="${image}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">${post.title}</h5>
+        <p class="card-text">${truncateText(post.selftext, 100)}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+      `
+    })
+    output += '</div>';
+    document.getElementById('results').innerHTML = output;
+  });
 
   e.preventDefault();
 });
@@ -54,3 +78,10 @@ function showMessage(message, className) {
   // timeout alert
   setTimeout(() => document.querySelector('.alert').remove(), 3000);
 }
+
+// truncate text
+function truncateText(text, limit) {
+  const shortened = text.indexOf(' ', limit);
+  if(shortened == -1) return text;
+  return text.substring(0, shortened);
+};

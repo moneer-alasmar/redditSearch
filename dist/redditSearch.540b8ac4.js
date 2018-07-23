@@ -103,11 +103,40 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({"index.js":[function(require,module,exports) {
+})({"redditapi.js":[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  search: function search(searchTerm, searchLimit, sortBy) {
+    console.log('Searching...');
+    return fetch('http://www.reddit.com/search.json?q=' + searchTerm + '&sort=' + sortBy + '&limit=' + searchLimit).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      return data.data.children.map(function (data) {
+        return data.data;
+      });
+    }).catch(function (err) {
+      return console.log(err);
+    });
+  }
+};
+},{}],"index.js":[function(require,module,exports) {
+'use strict';
+
+var _redditapi = require('./redditapi');
+
+var _redditapi2 = _interopRequireDefault(_redditapi);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // main search form
 var searchForm = document.getElementById('search-form');
 
 // search form input
+// importing reddit js
 var searchInput = document.getElementById('search-input');
 
 // form event listener
@@ -134,7 +163,19 @@ searchForm.addEventListener('submit', function (e) {
   searchInput.value = '';
 
   // search reddit api
+  _redditapi2.default.search(searchTerm, searchLimit, sortBy).then(function (results) {
+    var output = '<div class="card-columns">';
 
+    // loop through posts
+    results.forEach(function (post) {
+      // check for image
+      var image = post.preview ? post.preview.images[0].source.url : './Reddit-logo.jpg';
+
+      output += '\n      <div class="card">\n      <img class="card-img-top" src="' + image + '" alt="Card image cap">\n      <div class="card-body">\n        <h5 class="card-title">' + post.title + '</h5>\n        <p class="card-text">' + truncateText(post.selftext, 100) + '</p>\n        <a href="#" class="btn btn-primary">Go somewhere</a>\n      </div>\n    </div>\n      ';
+    });
+    output += '</div>';
+    document.getElementById('results').innerHTML = output;
+  });
 
   e.preventDefault();
 });
@@ -162,7 +203,14 @@ function showMessage(message, className) {
     return document.querySelector('.alert').remove();
   }, 3000);
 }
-},{}],"C:\\Users\\Moneer\\AppData\\Roaming\\npm\\node_modules\\parcel-bundler\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
+
+// truncate text
+function truncateText(text, limit) {
+  var shortened = text.indexOf(' ', limit);
+  if (shortened == -1) return text;
+  return text.substring(0, shortened);
+};
+},{"./redditapi":"redditapi.js"}],"C:\\Users\\Moneer\\AppData\\Roaming\\npm\\node_modules\\parcel-bundler\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
