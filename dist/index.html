@@ -4,9 +4,57 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- importing bootstrap -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+
   <title>redditSearch</title>
 </head>
 <body>
+  <nav class="navbar navbar-dark bg-primary mb-3">
+    <div class="container">
+      <span class="navbar-brand">redditSearch</span>
+    </div>
+  </nav>
+
+  <!-- search form begin -->
+  <div id="search-container" class="container">
+    <div id="search" class="card card-body bg-light mb-2">
+      <h4>redditSearch</h4>
+      <form id="search-form">
+        <div class="form-group">
+          <input type="text" id="search-input" class="form-control mb-3" placeholder="Enter search...">
+        </div>
+
+        <!-- search results sorting options -->
+        <div class="form-check form-check-inline">
+          Sort By:
+          <input type="radio" class="form-check-input ml-2" name="sortby" value="relevance" checked="">
+          <label class="form-check-label">
+            Relevance
+          </label>
+        </div>
+
+        <div class="form-check form-check-inline">
+          <input type="radio" class="form-check-input ml-2" name="sortby" value="new" checked="">
+          <label class="form-check-label">
+            Latest
+          </label>
+        </div>
+
+        <!-- limit results option -->
+        <h5 class="mt-2">Results: </h5>
+        <div class="form-group">
+          <select name="limit" id="limit" class="form-control">
+            
+          </select>
+        </div>
+
+
+      </form>
+    </div>
+
+  </div>
   
   <script src="/redditSearch.540b8ac4.js"></script>
 </body>
