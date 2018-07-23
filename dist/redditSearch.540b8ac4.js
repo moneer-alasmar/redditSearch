@@ -104,7 +104,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-alert(123);
+
 },{}],"C:\\Users\\Moneer\\AppData\\Roaming\\npm\\node_modules\\parcel-bundler\\src\\builtins\\hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -276,4 +276,3 @@ function hmrAccept(bundle, id) {
   });
 }
 },{}]},{},["C:\\Users\\Moneer\\AppData\\Roaming\\npm\\node_modules\\parcel-bundler\\src\\builtins\\hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/redditSearch.540b8ac4.map
